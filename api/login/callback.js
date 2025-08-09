@@ -1,5 +1,13 @@
 export default async function CallbackHandler(req, res)
 {
+    if(req.method !== "POST")
+    {
+        return res.status(405).json(
+        {
+            error: "Method not allowed"
+        });
+    }
+
     const { platform } = req.query;
     const { code, state, codeChallenge } = req.body;
 
