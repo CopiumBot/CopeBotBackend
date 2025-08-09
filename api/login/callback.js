@@ -1,12 +1,11 @@
 export default async function CallbackHandler(req, res)
 {
+    res.setHeader("Access-Control-Allow-Origin", "*");//https://copiumbot.github.io
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    
     if(req.method === "OPTIONS")
-    {
-        res.setHeader("Access-Control-Allow-Origin", "*");//https://copiumbot.github.io
-        res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
         return res.status(200).end();
-    }
 
     if(req.method !== "POST")
     {
