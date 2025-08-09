@@ -18,7 +18,7 @@ export default async function CallbackHandler(req, res)
     const { platform } = req.query;
     const { code, state, code_verifier } = req.body;
 
-    if(!platform || !code || !state || !codeChallenge)
+    if(!platform || !code || !state || !code_verifier)
     {
         return res.status(400).json(
         {
