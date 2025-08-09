@@ -1,19 +1,13 @@
 export default async function CallbackHandler(req, res)
 {
-    if(req.method !== "GET")
-    {
-        return res.status(405).json(
-        {
-            error: "Method not allowed"
-        });
-    }
-        
-    const { platform, code, state } = req.query;
-    if(!platform || !code || !state)
+    const { platform } = req.query;
+    const { code, state, codeChallenge } = req.body;
+
+    if(!platform || !code || !state || !codeChallenge)
     {
         return res.status(400).json(
         {
-            error: "Missing required query parameters"
+            error: "Missing required parameters"
         });
     }
         
@@ -33,8 +27,8 @@ export default async function CallbackHandler(req, res)
                     grant_type: "authorization_code",
                     client_id: process.env.CLIENTID,
                     client_secret: process.env.CLIENTSECRET,
-                    redirect_uri: "",
-                    code_verifier: state,
+                    redirect_uri: "https://copiumbot.github.io/kick",
+                    code_verifier: codeChallenge,
                     code: code 
                 })
             });
