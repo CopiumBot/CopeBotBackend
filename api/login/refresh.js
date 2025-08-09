@@ -1,4 +1,4 @@
-export default async function CallbackHandler(req, res)
+export default async function RefreshHandler(req, res)
 {
     res.setHeader("Access-Control-Allow-Origin", "https://copiumbot.github.io");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -16,9 +16,9 @@ export default async function CallbackHandler(req, res)
     }
 
     const { platform } = req.query;
-    const { code, state, code_verifier } = req.body;
+    const { refresh_token  } = req.body;
 
-    if(!platform || !code || !state || !code_verifier)
+    if(!platform || !refresh_token)
     {
         return res.status(400).json(
         {
@@ -39,12 +39,10 @@ export default async function CallbackHandler(req, res)
                 },
                 body: new URLSearchParams(
                 {
-                    grant_type: "authorization_code",
+                    grant_type: "refresh_token",
                     client_id: process.env.CLIENTID,
                     client_secret: process.env.CLIENTSECRET,
-                    redirect_uri: "https://copiumbot.github.io/kick",
-                    code_verifier,
-                    code
+                    refresh_token
                 })
             });
 
