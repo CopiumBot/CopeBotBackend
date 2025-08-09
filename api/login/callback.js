@@ -16,7 +16,7 @@ export default async function CallbackHandler(req, res)
     }
 
     const { platform } = req.query;
-    const { code, state, codeChallenge } = req.body;
+    const { code, state, code_verifier } = req.body;
 
     if(!platform || !code || !state || !codeChallenge)
     {
@@ -43,7 +43,7 @@ export default async function CallbackHandler(req, res)
                     client_id: process.env.CLIENTID,
                     client_secret: process.env.CLIENTSECRET,
                     redirect_uri: "https://copiumbot.github.io/kick",
-                    code_verifier: codeChallenge,
+                    code_verifier,
                     code: code 
                 })
             });
