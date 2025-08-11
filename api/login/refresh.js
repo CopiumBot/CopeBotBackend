@@ -40,8 +40,8 @@ export default async function RefreshHandler(req, res)
                 body: new URLSearchParams(
                 {
                     grant_type: "refresh_token",
-                    client_id: process.env.CLIENTID,
-                    client_secret: process.env.CLIENTSECRET,
+                    client_id: process.env.KICK_CLIENTID,
+                    client_secret: process.env.KICK_CLIENTSECRET,
                     refresh_token
                 })
             });

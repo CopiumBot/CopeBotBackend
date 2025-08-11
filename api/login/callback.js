@@ -40,8 +40,8 @@ export default async function CallbackHandler(req, res)
                 body: new URLSearchParams(
                 {
                     grant_type: "authorization_code",
-                    client_id: process.env.CLIENTID,
-                    client_secret: process.env.CLIENTSECRET,
+                    client_id: process.env.KICK_CLIENTID,
+                    client_secret: process.env.KICK_CLIENTSECRET,
                     redirect_uri: "https://copiumbot.github.io/kick",
                     code_verifier,
                     code
