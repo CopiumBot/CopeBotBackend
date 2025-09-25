@@ -18,7 +18,7 @@ export default async function CallbackHandler(req, res)
     }
 
     const { platform } = req.query;
-    const { code, state, code_verifier } = req.body;
+    const { code, state } = req.body;
 
     if(!platform || !code || !state)
     {
@@ -30,6 +30,7 @@ export default async function CallbackHandler(req, res)
         
     if(platform === "kick")
     {
+        const { code_verifier } = req.body;
         if(!code_verifier)
         {
             return res.status(400).json(
